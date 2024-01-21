@@ -20,10 +20,10 @@ public class Shopping {
             System.out.println("3. Очистить список");
             System.out.println("4. Завершить работу");
 
-            int actionNumber = scanner.nextInt();
+            String actionNumber = scanner.nextLine();
 
             switch (actionNumber) {
-                case 1:
+                case "1":
                     //добавление товара в список
                     System.out.println("Укажите наименованеи товара");
                     String product = scanner.next();
@@ -48,7 +48,7 @@ public class Shopping {
                         System.out.println("Такой товар уже есть в списке");
                     }
                     break;
-                case 2:
+                case "2":
                     // вывод списка товаров
                     for (int index = 0; index < shoppingList.length; index++) {
                         if (shoppingList[index] == null && index == 0) {
@@ -62,13 +62,13 @@ public class Shopping {
                         }
                     }
                     break;
-                case 3:
+                case "3":
                     // очистка списка товаров
                     shoppingList = new String[2];
                     productCount = 0;
                     System.out.println();
                     break;
-                case 4:
+                case "4":
                     // выход из программы
                     return;
                 default:
