@@ -7,8 +7,7 @@ public class Shopping {
 
         System.out.println("Вас приветствует список покупок!");
 
-        String[] shoppingList;
-        shoppingList = new String[2];// Объявите массив shoppingList через длину
+        String[] shoppingList = new String[8];// Объявите массив shoppingList через длину
         int productCount = 0; // переменная для подсчёта добавленных товаров
 
         Scanner scanner = new Scanner(System.in);
@@ -20,6 +19,7 @@ public class Shopping {
             System.out.println("3. Очистить список");
             System.out.println("4. Завершить работу");
 
+            //заменил тип данных для комманд, для избежания исключения.
             String actionNumber = scanner.nextLine();
 
             switch (actionNumber) {
@@ -29,17 +29,8 @@ public class Shopping {
                     String product = scanner.next();
                     if (!Arrays.asList(shoppingList).contains(product)) {
                         if (shoppingList.length == productCount) {
-                            // создаем копию shoppingList
-                            String[] cache = shoppingList;
-                            // создаем новый shoppingList, с увеличенной размерностью
-                            shoppingList = new String[productCount + 1];
-                            // восстанавливаем ранее добавленные товары
-                            for (int index = 0; index < shoppingList.length; index++) {
-                                if (!(index < cache.length)) {
-                                    break;
-                                }
-                                shoppingList[index] = cache[index];
-                            }
+                            //Arrays.copyOf - позваляет изменить размер массива
+                            shoppingList = Arrays.copyOf(shoppingList, productCount * 2);
                         }
                         shoppingList[productCount] = product;
                         productCount++;
@@ -64,9 +55,9 @@ public class Shopping {
                     break;
                 case "3":
                     // очистка списка товаров
-                    shoppingList = new String[2];
+                    //Arrays.fill - позваляет все злементам массива задать одинаковое значение.
+                    Arrays.fill(shoppingList, null);
                     productCount = 0;
-                    System.out.println();
                     break;
                 case "4":
                     // выход из программы
